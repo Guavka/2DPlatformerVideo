@@ -48,6 +48,31 @@ public class PlayerAttackComp : MonoBehaviour
         _shootPoint = go.transform;
     }
 
+    private void CreateBullet()
+    {
+        BulletController bullet = null;
+        _bulletPool.ForEach((item) => {
+            if (!item.gameObject.activeInHierarchy)
+            {
+                bullet = item;
+                return;
+            }
+        });
+
+        if (bullet == null)
+        {
+            bullet = Instantiate(_bulletPrefab, _shootPoint.position, _shootPoint.rotation, _fireballHolder);
+            _bulletPool.Add(bullet);
+        }
+        else
+        {
+            bullet.gameObject.SetActive(true);
+            bullet.transform.position = _shootPoint.position;
+        }
+
+        bullet.Init(_moveComp.IsLeft);
+    }
+
     private void CheckAttack()
     {
         if (Input.GetAxis("Fire1") != 0 && _counter >= _attackCalldown)
@@ -55,8 +80,7 @@ public class PlayerAttackComp : MonoBehaviour
             _counter = 0;
             _animator.SetTrigger(_isAttackTriggerName);
 
-            var bullet = Instantiate(_bulletPrefab, _fireballHolder);
-            bullet.Init(_moveComp.IsLeft);
+            CreateBullet();
         }
     }
 }
