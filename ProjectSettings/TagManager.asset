@@ -42,3 +42,21 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BG
+    uniqueID: 3299746151
+    locked: 0
+  - name: Bg Secondary
+    uniqueID: 1458301479
+    locked: 0
+  - name: Ground
+    uniqueID: 532157709
+    locked: 0
+  - name: Wall
+    uniqueID: 2869790351
+    locked: 0
+  - name: Enemies
+    uniqueID: 1107545169
+    locked: 0
+  - name: Player
+    uniqueID: 3231150353
+    locked: 0
